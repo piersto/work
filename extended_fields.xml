@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<ExtendedFields>
+		<Field calcrt="111"
+		       name="Field1">Value1</Field>
+		<Field calcrt="222"
+		       name="Field2"/>
+		<Field calcrt="333"
+		       name="Field3">Value3</Field>
+	</ExtendedFields>
+</root>

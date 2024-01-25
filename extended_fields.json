@@ -1,0 +1,20 @@
+{
+  "root": {
+    "field": [
+      {
+        "value": "Value1",
+        "calcrt": "111",
+        "name": "Field1"
+      },
+      {
+        "calcrt": "222",
+        "name": "Field2"
+      },
+      {
+        "value": "Value3",
+        "calcrt": "333",
+        "name": "Field3"
+      }
+    ]
+  }
+}
