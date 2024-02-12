@@ -11,7 +11,7 @@ def test():
 
     def parse_text_file(file_path, original_slices):
         # Adjust slices to be one index smaller
-        adjusted_slices = [(start - 1, end) for start, end in original_slices]
+        adjusted_slices = [(start - 1) for start in original_slices]
 
         # Open the file in read mode ('r' for reading)
         with open(file_path, 'r') as file:

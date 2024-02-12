@@ -6,11 +6,14 @@ def extract_data_from_xml_extended_fields(xml_file_path):
     tree = ET.parse(xml_file_path)
     root = tree.getroot()
 
-    # Define a namespace dictionary
-    namespaces = {'ns': 'xmlns'}  # Replace 'aoue' with the actual namespace URI
+    # Extract the namespace from the root element
+    namespace = root.tag.split('}')[0][1:]  # Extract namespace without braces
+
+    # Construct the namespace dictionary
+    namespace_dict = {'ns': namespace}
 
     # Locate the 'ExtendedFields' element
-    extended_fields_element = root.find('.//ns:ExtendedFields', namespaces)
+    extended_fields_element = root.find('.//ns:ExtendedFields', namespace_dict)
 
     # If 'ExtendedFields' element is found, proceed with extraction
     if extended_fields_element is not None:
@@ -18,7 +21,7 @@ def extract_data_from_xml_extended_fields(xml_file_path):
         field_data_list = []
 
         # Iterate over each 'Field' element within 'ExtendedFields'
-        for field_element in extended_fields_element.findall('ns:Field', namespaces):
+        for field_element in extended_fields_element.findall('ns:Field', namespace_dict):
             # Extract values
             field_value = field_element.text
             calcrt_value = field_element.get('calcrt')
@@ -61,8 +64,8 @@ def extract_values_from_json(json_file_path):
     return flatten_json(data)
 
 # Specify the paths to your XML and JSON files
-xml_file_path = 'C:\PROJECTS\PYTHON\work\extended_fields.xml'
-json_file_path = 'C:\PROJECTS\PYTHON\work\extended_fields.json'
+xml_file_path = 'C:\PROJECTS\PYTHON\work\extended_fields.xml'  # Replace with the actual path to your XML file
+json_file_path = 'C:\PROJECTS\PYTHON\work\extended_fields.json'  # Replace with the actual path to your JSON file
 
 # Call the functions and store the results for later comparison
 result_list_xml = extract_data_from_xml_extended_fields(xml_file_path)
