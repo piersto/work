@@ -1,6 +1,5 @@
 import json
 
-
 def test_tags():
     # Path to your JSON file
     json_file_path = "C:\PROJECTS\PYTHON\work\complex.json"
@@ -53,6 +52,15 @@ def test_tags():
 
     # Check if all tags from the extracted list are present in the specifications
     for tag in tags_list:
-        assert tag in tags_from_specs, f"Tag '{tag}' is not in the specifications"
+        assert tag in tags_from_specs, f"Unexpected tag '{tag}' found in the JSON data."
+
+    # Check for missing tags in the specifications
+    missing_tags = [tag for tag in tags_from_specs if tag not in tags_list]
+    if missing_tags:
+        print("The following tags specified in the specifications are missing from the JSON data:")
+        for tag in missing_tags:
+            print(tag)
+
+    assert not missing_tags, "Some tags specified in the specifications are missing from the JSON data."
 
     print("All tags present in the JSON data are in the specifications.")
