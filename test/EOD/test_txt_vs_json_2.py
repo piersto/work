@@ -62,6 +62,8 @@ def extract_values_from_json(json_file_path):
             precision = len(str(json_value).split(".")[1]) if "." in str(json_value) else 0
             formatted_value = format(float(json_value), f".{precision}f")
             values.append(str(formatted_value))
+        elif isinstance(json_value, bool):
+            values.append("Y" if json_value else "N")
         else:
             values.append(str(json_value))
         return values
