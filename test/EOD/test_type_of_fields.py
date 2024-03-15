@@ -1,6 +1,6 @@
 import json
+import pytest
 import os
-
 
 def flatten_json(json_dict, parent_key=''):
     values = {}
@@ -17,20 +17,18 @@ def flatten_json(json_dict, parent_key=''):
             values[new_key] = value
     return values
 
-
 def extract_values_from_json(json_file_path):
     with open(json_file_path, 'r') as file:
         data = json.load(file)
 
     return flatten_json(data)
 
-
 def test_json_data_types():
     # Get the path to the directory containing this script
     script_directory = os.path.dirname(os.path.realpath(__file__))
 
     # Specify the name of your JSON file
-    json_file_name = 'C:\PROJECTS\PYTHON\work\json_type_of_fields.json'
+    json_file_name = r'C:\PROJECTS\PYTHON\work\json_type_of_fields.json'
 
     # Construct the full path to your JSON file
     json_file_path = os.path.join(script_directory, json_file_name)
@@ -42,10 +40,10 @@ def test_json_data_types():
     print("Extracted values from JSON:", data_values)
 
     # Define the fields for each type
-    string_fields = ['persons_person_name', 'persons_person_surname']
-    int_fields = ['persons_person_age']
-    float_fields = ['persons_person_height']
-    bool_fields = ['persons_person_is_student', 'persons_person_is_married']
+    string_fields = ['name', 'surname', 'one']
+    int_fields = ['age', 'two']
+    float_fields = ['height']
+    bool_fields = ['is_student', 'is_married']
 
     # Test string fields
     for field in string_fields:
@@ -69,3 +67,5 @@ def test_json_data_types():
         assert value is not isinstance(value, int), f"Field '{field}' is not of type bool or null. Actual type: {type(value)}."
         assert value is not isinstance(value, str), f"Field '{field}' is not of type bool or null. Actual type: {type(value)}."
         assert value is not isinstance(value, float), f"Field '{field}' is not of type bool or null. Actual type: {type(value)}."
+
+
