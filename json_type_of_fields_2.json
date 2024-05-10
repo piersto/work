@@ -1,0 +1,17 @@
+{
+  "persons": {
+
+	"person": {
+    "name": "John",
+    "surname": "Doe",
+    "age": 30,
+    "height": 175.5111111111,
+    "is_student": "true",
+	"faculty" : {
+		"one" : 1,
+		"two": "1"
+	},
+    "is_married": false
+	}
+  }
+}
