@@ -18,10 +18,25 @@ def flatten_json(json_file_path):
 
     return flatten(data)
 
+def remove_parent_lines(json_file_path, copy_file_path):
+    with open(json_file_path, 'r') as file:
+        data = json.load(file)
+    if isinstance(data, dict) and len(data) == 1:
+        key = list(data.keys())[0]
+        data = data[key]
+    with open(copy_file_path, 'w') as copy_file:
+        json.dump(data, copy_file)
+
 def compare_json_files(file1_path, file2_path, float_tolerance=1e-9):
-    # Flatten both JSON files
-    flattened_data1 = flatten_json(file1_path)
-    flattened_data2 = flatten_json(file2_path)
+    # Remove parent lines from both files
+    copy_file1_path = file1_path + "_copy.json"
+    copy_file2_path = file2_path + "_copy.json"
+    remove_parent_lines(file1_path, copy_file1_path)
+    remove_parent_lines(file2_path, copy_file2_path)
+
+    # Flatten both copied JSON files
+    flattened_data1 = flatten_json(copy_file1_path)
+    flattened_data2 = flatten_json(copy_file2_path)
 
     # Check if attribute values are identical
     for key1, val1 in flattened_data1.items():
